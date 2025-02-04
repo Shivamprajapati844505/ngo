@@ -1,0 +1,36 @@
+
+.navbar {
+    height: 60px;
+    background-color: #b85900;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 20px;
+    color: white;
+  }
+  .navbar h2{
+
+  }
+  .navbar h2 {
+    font-size: 24px;
+    color: white;
+  }
+  
+  .navbar ul {
+    display: flex;
+    list-style: none;
+    gap: 15px;
+  }
+  
+  .navbar ul li {
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .navbar ul li:hover {
+    color: #007bff;
+  }.navbar img{
+    width: 60px;
+    border-radius: 50%;
+  }
+ 

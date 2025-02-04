@@ -1,34 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Profile.css';
+import Navbar from './../Navbar/Navbar';
+import Sidebar from './../Sidebar/Sidebar';
 
 function Profile() {
   const [ngo, setNgo] = useState(null);
-  const email = localStorage.getItem('userEmail');  // Retrieve the email from localStorage
-  // Replace this with actual user's email
+  const email = localStorage.getItem('userEmail');  // Get email from localStorage
 
   useEffect(() => {
     const fetchNgoProfile = async () => {
-      try {
-        // Assuming you have the user's email in state or props
-        const email = 'user@example.com';  // Replace with dynamic email
         const response = await axios.get(`http://localhost:8800/ngo/${email}`);
-        setNgoProfile(response.data);  // Assuming you have state for the profile data
-      } catch (error) {
-        console.error('Error fetching NGO:', error);
-      }
+        setNgo(response.data);
     };
-    
 
     fetchNgoProfile();
   }, [email]);
 
   return (
-    <div>
-      <h2>NGO Profile</h2>
+    <>
+    <Navbar/>
+    <div className="ngo-container">
+    <Sidebar/>
       {ngo ? (
         <div className="ngo-card">
-          <h3>{ngo.organizationName}</h3>
+          <h2>{ngo.organizationName}</h2>
           <p><strong>Address:</strong> {ngo.address}</p>
           <p><strong>City:</strong> {ngo.city}</p>
           <p><strong>Pincode:</strong> {ngo.pincode}</p>
@@ -39,7 +35,9 @@ function Profile() {
       ) : (
         <p>Loading...</p>
       )}
+      
     </div>
+    </>
   );
 }
 

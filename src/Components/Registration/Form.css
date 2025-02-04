@@ -1,14 +1,17 @@
-body, html {
-    height: 800px;
-    margin:20px 0;
-    display: flex;
-    justify-content: center; /* Horizontal alignment */
-    align-items: center;    /* Vertical alignment */
-    background-color: #f0f0f0; /* Optional: Light background color */
+body {
+    margin:0px 0;
+    background-color: #f0f0f0; 
   }
-  
-  .form-container {
+  .form-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+
+  }
+  .ngo-form {
     width: 600px;
+    height: 650px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -17,25 +20,25 @@ body, html {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add some shadow */
   }
   
-  .form-container h2 {
+  .ngo-form h2 {
     text-align: center;
     color: #333;
   }
   
-  .form-container p {
+  .ngo-form p {
     text-align: center;
     color: #666;
   }
   
-  .form-container label {
+  .ngo-form label {
     display: block;
     margin-bottom: 10px;
     color: #444;
   }
   
-  .form-container input,
-  .form-container select,
-  .form-container textarea {
+  .ngo-form input,
+  .ngo-form select,
+  .ngo-form textarea {
     width: 90%;
     padding: 10px;
     margin-top: 5px;
@@ -45,7 +48,7 @@ body, html {
     font-size: 14px;
   }
   
-  .form-container button {
+  .ngo-form button {
     width: 100%;
     padding: 10px;
     background-color: #4CAF50;
@@ -56,11 +59,11 @@ body, html {
     cursor: pointer;
   }
   
-  .form-container button:hover {
+  .ngo-form button:hover {
     background-color: #45a049;
   }
   
-  .form-container div {
+  .ngo-form div {
     display: flex;
     gap: 8px;
   }

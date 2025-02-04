@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Form.css";
@@ -16,38 +16,34 @@ function Form() {
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    // Validate fields before submitting to the backend
+
     if (!/^\d{6}$/.test(formData.pincode)) {
       alert("Invalid pincode! It should be a 6-digit number.");
       return;
     }
-  
+
     if (!/^\d{10}$/.test(formData.mobile)) {
       alert("Invalid mobile number! It should contain 10 digits.");
       return;
     }
-  
+
     if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
       alert("Invalid email format!");
       return;
     }
-  
+
     try {
       const response = await axios.post("http://localhost:8800/ngo", formData);
 
       if (response.status === 201) {
         alert("NGO registered successfully!");
-        window.location.href = "http://localhost:3000/";
+        localStorage.setItem("userEmail", formData.email);  // Store email in localStorage
+        navigate("/profile"); // Redirect to profile
       } else {
         alert("Error registering NGO");
       }
@@ -58,76 +54,38 @@ function Form() {
   };
 
   return (
-    <form className="form-container" onSubmit={handleSubmit}>
+    <div className="form-container">
+    <form className="ngo-form" onSubmit={handleSubmit}>
       <h2>NGO Registration</h2>
       <p>Please fill in the information below.</p>
       <label>
         NGO Name:
-        <input
-          type="text"
-          name="organizationName"
-          value={formData.organizationName}
-          onChange={handleChange}
-          placeholder="Organization Name"
-        />
+        <input type="text" name="organizationName" onChange={handleChange} placeholder="Organization Name" />
       </label>
       <label>
         Address:
-        <input
-          type="text"
-          name="address"
-          value={formData.address}
-          onChange={handleChange}
-          placeholder="Address"
-        />
+        <input type="text" name="address" onChange={handleChange} placeholder="Address" />
         <div>
-          <input
-            type="text"
-            name="city"
-            value={formData.city}
-            onChange={handleChange}
-            placeholder="City"
-          />
-          <input
-            type="text"
-            name="pincode"
-            value={formData.pincode}
-            onChange={handleChange}
-            placeholder="Pincode"
-          />
+          <input type="text" name="city" onChange={handleChange} placeholder="City" />
+          <input type="text" name="pincode" onChange={handleChange} placeholder="Pincode" />
         </div>
       </label>
       <label>
         Contact Number:
-        <input
-          type="text"
-          name="mobile"
-          value={formData.mobile}
-          onChange={handleChange}
-          placeholder="+910000000000"
-        />
+        <input type="text" name="mobile" onChange={handleChange} placeholder="Mobile" />
       </label>
       <label>
         Email:
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Email"
-        />
+        <input type="email" name="email" onChange={handleChange} placeholder="Email" />
       </label>
       <label>
         NGO Mission:
-        <textarea
-          name="mission"
-          value={formData.mission}
-          onChange={handleChange}
-          placeholder="Write the mission here..."
-        />
+        <textarea name="mission" onChange={handleChange} placeholder="Write the mission here..." />
       </label>
       <button type="submit">Submit</button>
     </form>
+        
+    </div>
   );
 }
 
